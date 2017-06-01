@@ -61,8 +61,14 @@ class YouTubeMatcher extends AbstractMatcher
      * @param array $attributes
      * @return string
      */
-    public function iframe($id, array $attributes = ['rel' => 0])
+    public function iframe($id, array $attributes = [])
     {
+        if (!$attributes) {
+            $attributes = [
+                'rel' => 0,
+            ];
+        }
+
         return '<iframe
             frameborder="0"
             src="https://www.youtube.com/embed/' . $id . '"
