@@ -76,9 +76,10 @@ abstract class AbstractMatcher implements MatcherInterface
      *
      * @param       $id
      * @param array $attributes
+     * @param array $parameters
      * @return string
      */
-    abstract public function iframe($id, array $attributes = []);
+    abstract public function iframe($id, array $attributes = [], array $parameters = []);
 
     /**
      * Return the video's cover image.
