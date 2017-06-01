@@ -42,9 +42,10 @@ interface MatcherInterface
      *
      * @param       $id
      * @param array $attributes
+     * @param array $parameters
      * @return string
      */
-    public function iframe($id, array $attributes = []);
+    public function iframe($id, array $attributes = [], array $parameters = []);
 
     /**
      * Return the video's cover image.

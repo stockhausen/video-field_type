@@ -62,11 +62,11 @@ class VimeoMatcher extends AbstractMatcher
      * @param array $attributes
      * @return string
      */
-    public function iframe($id, array $attributes = [])
+    public function iframe($id, array $attributes = [], array $parameters = [])
     {
         return '<iframe
             frameborder="0"
-            src="https://player.vimeo.com/video/' . $id . '"
+            src="https://player.vimeo.com/video/' . $id . '?' . http_build_query($parameters) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 

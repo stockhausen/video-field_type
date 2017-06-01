@@ -59,15 +59,16 @@ class YouTubeMatcher extends AbstractMatcher
      *
      * @param       $id
      * @param array $attributes
+     * @param array $parameters
      * @return string
      */
-    public function iframe($id, array $attributes = [])
+    public function iframe($id, array $attributes = [], array $parameters = [])
     {
-        $attributes = $attributes ?: ['rel' => 0];
+        $parameters = $parameters ?: ['rel' => 0];
 
         return '<iframe
             frameborder="0"
-            src="https://www.youtube.com/embed/' . $id . '"
+            src="https://www.youtube.com/embed/' . $id . '?' . http_build_query($parameters) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 
