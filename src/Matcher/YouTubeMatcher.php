@@ -20,6 +20,13 @@ class YouTubeMatcher extends AbstractMatcher
     protected $provider = 'YouTube';
 
     /**
+     * The regex pattern.
+     *
+     * @var string
+     */
+    protected $pattern = '/^(?:(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/)(?:watch\?v=|v\/)?([a-zA-Z0-9_]*)/';
+
+    /**
      * Return the video ID from the video URL.
      *
      * @param $url
@@ -27,9 +34,9 @@ class YouTubeMatcher extends AbstractMatcher
      */
     public function id($url)
     {
-        parse_str(parse_url($url, PHP_URL_QUERY), $query);
+        preg_match($this->pattern, $url, $matches);
 
-        return array_get($query, 'v');
+        return array_get($matches, 1);
     }
 
     /**
@@ -40,7 +47,7 @@ class YouTubeMatcher extends AbstractMatcher
      */
     public function matches($url)
     {
-        return str_contains($url, 'youtube.com');
+        return (bool)preg_match($this->pattern, $url, $matches);
     }
 
     /**
