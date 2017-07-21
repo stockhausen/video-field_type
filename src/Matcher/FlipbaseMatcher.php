@@ -1,5 +1,7 @@
 <?php namespace Anomaly\VideoFieldType\Matcher;
 
+use Anomaly\Streams\Platform\Image\Image;
+
 /**
  * Class FlipbaseMatcher
  *
@@ -9,6 +11,7 @@
  */
 class FlipbaseMatcher extends AbstractMatcher
 {
+
     /**
      * The provider.
      *
@@ -27,7 +30,7 @@ class FlipbaseMatcher extends AbstractMatcher
      */
     public function id($url)
     {
-        $segments = explode('/', substr(parse_url($url, PHP_URL_PATH), 1));
+        $segments      = explode('/', substr(parse_url($url, PHP_URL_PATH), 1));
         $host_segments = explode('.', parse_url($url, PHP_URL_HOST));
 
         return $host_segments[0] . ':' . end($segments);
@@ -53,7 +56,8 @@ class FlipbaseMatcher extends AbstractMatcher
     public function embed($url)
     {
         $id = explode(':', $this->id($url));
-        return 'https://'.$id[0].'.flipbase.com/embed/'.$id[1];
+
+        return 'https://' . $id[0] . '.flipbase.com/embed/' . $id[1];
     }
 
     /**
@@ -61,15 +65,18 @@ class FlipbaseMatcher extends AbstractMatcher
      *
      * @param       $id
      * @param array $attributes
+     * @param array $parameters
      * @return string
      */
-    public function iframe($id, array $attributes = [])
+    public function iframe($id, array $attributes = [], array $parameters = [])
     {
         $segments = explode(':', $id);
+
         return '<iframe
             frameborder="0"
-            src="https://'.$segments[0].'.flipbase.com/embed/'.$segments[1].'"
-            ' . $this->html->attributes($attributes) . '></iframe>';
+            src="https://' . $segments[0] . '.flipbase.com/embed/' . $segments[1]
+            . '?' . http_build_query($parameters) . '"'
+            . $this->html->attributes($attributes) . '></iframe>';
     }
 
     /**
@@ -82,6 +89,7 @@ class FlipbaseMatcher extends AbstractMatcher
     public function cover($id)
     {
         dd('not yet implemented');
+
         return '';
     }
 
@@ -96,6 +104,7 @@ class FlipbaseMatcher extends AbstractMatcher
     public function image($id, $image = null)
     {
         dd('not yet implemented');
+
         return '';
     }
 }
