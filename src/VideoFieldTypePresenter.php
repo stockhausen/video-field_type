@@ -31,9 +31,10 @@ class VideoFieldTypePresenter extends FieldTypePresenter
      * Return the embed iframe.
      *
      * @param array $attributes
+     * @param array $parameters
      * @return PluginCriteria
      */
-    public function iframe(array $attributes = [])
+    public function iframe(array $attributes = [], array $parameters = [])
     {
         if (!$this->object->getValue()) {
             return null;
@@ -44,8 +45,8 @@ class VideoFieldTypePresenter extends FieldTypePresenter
 
         return new PluginCriteria(
             'render',
-            function (Collection $options) use ($matcher, $attributes) {
-                return $matcher->iframe($matcher->id($this->object->getValue()), $options->merge($attributes)->all());
+            function (Collection $options) use ($matcher, $attributes, $parameters) {
+                return $matcher->iframe($matcher->id($this->object->getValue()), $options->merge($attributes)->all(), $parameters);
             }
         );
     }
