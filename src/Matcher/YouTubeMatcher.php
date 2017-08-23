@@ -91,6 +91,17 @@ class YouTubeMatcher extends AbstractMatcher
     }
 
     /**
+     * Return the video's cover image path.
+     *
+     * @param $id
+     * @return Image
+     */
+    public function coverPath($id)
+    {
+        return 'https://img.youtube.com/vi/' . $id . '/0.jpg';
+    }
+    
+    /**
      * Return a video image.
      *
      * @param      $id
