@@ -164,6 +164,23 @@ class VideoFieldTypePresenter extends FieldTypePresenter
 
         return $matcher->cover($this->id());
     }
+    
+    /**
+     * Return the cover path.
+     *
+     * @return null
+     */
+    public function coverPath()
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return $matcher->coverPath($this->id());
+    }    
 
     /**
      * Return an image.
